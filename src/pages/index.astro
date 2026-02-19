@@ -1,15 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AppCard from '../components/AppCard.astro';
-import BlogCard from '../components/BlogCard.astro';
 import CTA from '../components/CTA.astro';
 import apps from '../data/apps.json';
-import { getCollection } from 'astro:content';
-
-const blogPosts = await getCollection('blog');
-const recentPosts = blogPosts
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
 
 const schema = {
   '@context': 'https://schema.org',
@@ -129,40 +122,6 @@ const whyLoomicItems = [
       </div>
     </div>
   </section>
-
-  <!-- Latest from Blog -->
-  {recentPosts.length > 0 && (
-    <section class="section-padding bg-gray-50">
-      <div class="container-custom">
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-              Latest from the Blog
-            </h2>
-            <p class="text-lg text-gray-600">
-              Insights on retention, profitability, and DTC strategy.
-            </p>
-          </div>
-          <a href="/blog" class="text-primary-500 font-medium hover:text-primary-600 transition-colors">
-            View all posts →
-          </a>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {recentPosts.map((post) => (
-            <BlogCard
-              title={post.data.title}
-              slug={post.id}
-              date={post.data.date}
-              category={post.data.category}
-              excerpt={post.data.excerpt}
-              image={post.data.image}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- Final CTA -->
   <CTA
