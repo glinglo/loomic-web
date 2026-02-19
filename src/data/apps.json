@@ -1,26 +1,10 @@
 [
   {
-    "name": "BuyAgain",
-    "slug": "buyagain",
-    "tagline": "Know when customers need to reorder — automatically",
-    "icon": "/images/apps/buyagain-icon.svg",
-    "status": "live",
-    "color": "#EC6161"
-  },
-  {
-    "name": "OrderProfit",
-    "slug": "orderprofit",
-    "tagline": "See real profit per order, not just revenue",
-    "icon": "/images/apps/orderprofit-icon.svg",
-    "status": "coming-soon",
-    "color": "#10B981"
-  },
-  {
     "name": "ChatHub",
     "slug": "chathub",
     "tagline": "All your customer conversations in one place",
     "icon": "/images/apps/chathub-icon.svg",
-    "status": "coming-soon",
+    "status": "live",
     "color": "#6366F1"
   }
 ]
