@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTA from '../components/CTA.astro';
+
+const values = [
+  {
+    title: 'Data-driven decisions',
+    description: 'We believe every Shopify merchant deserves access to analytics that were once reserved for enterprise brands. Our apps turn your existing order data into actionable insights.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />',
+  },
+  {
+    title: 'Fair, transparent pricing',
+    description: "No enterprise sales calls. No surprise fees. No 'contact us for pricing.' Our pricing is public, usage-based, and designed to grow with your business.",
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+  },
+  {
+    title: 'Real, human support',
+    description: 'When you reach out, a real person responds. We answer every email, usually within hours. Your success with our apps is our success.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />',
+  },
+  {
+    title: 'Embedded, not external',
+    description: 'Our apps live inside your Shopify admin. No separate logins, no external dashboards. Everything works where you already work.',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />',
+  },
+];
+---
+
+<BaseLayout
+  title="About Loomic - Shopify App Developers"
+  description="We're a small team building useful, accessible Shopify apps. Our mission: democratize analytics and retention tools for DTC merchants."
+>
+  <!-- Hero -->
+  <section class="section-padding bg-gradient-to-b from-gray-50 to-white">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Building tools that
+          <span class="gradient-text">merchants actually need</span>
+        </h1>
+        <p class="text-xl text-gray-600">
+          We're a small team obsessed with making Shopify stores more successful.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+          Our Mission
+        </h2>
+
+        <div class="prose-custom">
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            The best retention and analytics tools have historically been expensive enterprise software, out of reach for most independent merchants. We're changing that.
+          </p>
+
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            Loomic builds Shopify apps that give every store access to the insights and automation they need to grow. We focus on the problems that actually matter: understanding when customers will buy again, knowing which orders are actually profitable, and capturing demand when products go out of stock.
+          </p>
+
+          <p class="text-lg text-gray-600 leading-relaxed">
+            Our apps are built to be useful from day one. No complicated setup, no required integrations, no onboarding calls. Install, sync your data, and start getting value immediately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          How We Work
+        </h2>
+        <p class="text-lg text-gray-600">
+          Everything we build follows these principles.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {values.map((value) => (
+          <div class="bg-white p-6 rounded-xl border border-gray-100">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 text-white mb-4">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={value.icon} />
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">{value.title}</h3>
+            <p class="text-gray-600">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+          Why We Build for Shopify
+        </h2>
+
+        <div class="prose-custom">
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            Shopify powers millions of stores, from side projects to billion-dollar brands. The platform gives merchants incredible flexibility, but the app ecosystem can be overwhelming — thousands of options, many of them mediocre, overpriced, or overly complicated.
+          </p>
+
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            We build the apps we wish existed when we were running our own stores. Focused tools that do one thing well, priced fairly, with support that actually helps.
+          </p>
+
+          <p class="text-lg text-gray-600 leading-relaxed">
+            Every app we release is something we'd install on our own store without hesitation. That's the bar we hold ourselves to.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTA
+    title="Want to work with us?"
+    description="We're always looking for feedback, partnership ideas, and ways to help merchants succeed."
+    buttonText="Get in touch"
+    buttonHref="/contact"
+  />
+</BaseLayout>

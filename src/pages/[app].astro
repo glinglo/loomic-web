@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import AppLayout from '../layouts/AppLayout.astro';
+
+export async function getStaticPaths() {
+  const apps = await getCollection('apps');
+  return apps.map((app) => ({
+    params: { app: app.data.slug },
+    props: { app },
+  }));
+}
+
+const { app } = Astro.props;
+const { data } = app;
+---
+
+<AppLayout
+  name={data.name}
+  slug={data.slug}
+  tagline={data.tagline}
+  appStoreUrl={data.appStoreUrl}
+  icon={data.icon}
+  category={data.category}
+  status={data.status}
+  color={data.color}
+  problem={data.problem}
+  steps={data.steps}
+  features={data.features}
+  pricing={data.pricing}
+/>

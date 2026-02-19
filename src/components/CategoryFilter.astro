@@ -1,0 +1,36 @@
+---
+interface Props {
+  categories: string[];
+  currentCategory?: string;
+}
+
+const { categories, currentCategory } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2 mb-8">
+  <a
+    href="/blog"
+    class:list={[
+      "px-4 py-2 text-sm font-medium rounded-full transition-all duration-200",
+      !currentCategory
+        ? "bg-gray-900 text-white"
+        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+    ]}
+  >
+    All Posts
+  </a>
+
+  {categories.map((category) => (
+    <a
+      href={`/blog?category=${encodeURIComponent(category)}`}
+      class:list={[
+        "px-4 py-2 text-sm font-medium rounded-full transition-all duration-200",
+        currentCategory === category
+          ? "bg-gray-900 text-white"
+          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+      ]}
+    >
+      {category}
+    </a>
+  ))}
+</div>

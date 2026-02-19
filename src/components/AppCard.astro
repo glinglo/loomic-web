@@ -1,0 +1,49 @@
+---
+interface Props {
+  name: string;
+  slug: string;
+  tagline: string;
+  icon: string;
+  status: 'live' | 'coming-soon';
+  color: string;
+}
+
+const { name, slug, tagline, icon, status, color } = Astro.props;
+---
+
+<a
+  href={`/${slug}`}
+  class="group block bg-white rounded-xl border border-gray-100 p-6 transition-all duration-200 hover:border-gray-200 hover:shadow-lg"
+>
+  <div class="flex items-start gap-4">
+    <!-- Icon -->
+    <div
+      class="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl font-bold shrink-0"
+      style={`background-color: ${color}`}
+    >
+      {name.charAt(0)}
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 mb-1">
+        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-500 transition-colors">
+          {name}
+        </h3>
+        {status === 'coming-soon' && (
+          <span class="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+            Coming Soon
+          </span>
+        )}
+      </div>
+      <p class="text-sm text-gray-500 mb-3">
+        {tagline}
+      </p>
+      <span class="inline-flex items-center text-sm font-medium text-primary-500 group-hover:gap-2 transition-all duration-200">
+        Learn more
+        <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </span>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,90 @@
+---
+import apps from '../data/apps.json';
+
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  company: [
+    { href: '/about', label: 'About Us' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  apps: apps.map(app => ({
+    href: `/${app.slug}`,
+    label: app.name,
+  })),
+  legal: [
+    { href: '/privacy-policy.html', label: 'Privacy Policy' },
+  ],
+};
+---
+
+<footer class="bg-gray-50 border-t border-gray-100">
+  <div class="container-custom section-padding">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-1">
+        <a href="/" class="inline-block mb-4">
+          <span class="text-xl font-bold gradient-text">Loomic</span>
+        </a>
+        <p class="text-sm text-gray-500 max-w-xs">
+          Shopify apps that help you sell more. Built with love for DTC brands.
+        </p>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h4 class="text-sm font-semibold text-gray-900 mb-4">Company</h4>
+        <ul class="space-y-3">
+          {footerLinks.company.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Apps -->
+      <div>
+        <h4 class="text-sm font-semibold text-gray-900 mb-4">Apps</h4>
+        <ul class="space-y-3">
+          {footerLinks.apps.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="text-sm font-semibold text-gray-900 mb-4">Legal</h4>
+        <ul class="space-y-3">
+          {footerLinks.legal.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-gray-500">
+          &copy; {currentYear} Loomic. All rights reserved.
+        </p>
+        <p class="text-sm text-gray-400">
+          Made for Shopify merchants everywhere
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

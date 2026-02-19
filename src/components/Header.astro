@@ -1,0 +1,141 @@
+---
+import apps from '../data/apps.json';
+
+const liveApps = apps.filter(app => app.status === 'live');
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') {
+    return currentPath === '/';
+  }
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+  <nav class="container-custom">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <span class="text-xl md:text-2xl font-bold gradient-text">Loomic</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm font-medium transition-colors duration-200",
+              isActive(link.href)
+                ? "text-primary-500"
+                : "text-gray-600 hover:text-gray-900"
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+
+        <!-- Apps Dropdown -->
+        <div class="relative group">
+          <button class="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200">
+            Apps
+            <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="py-2">
+              {apps.map((app) => (
+                <a
+                  href={`/${app.slug}`}
+                  class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  <span class="w-2 h-2 rounded-full" style={`background-color: ${app.color}`}></span>
+                  <span>{app.name}</span>
+                  {app.status === 'coming-soon' && (
+                    <span class="ml-auto text-xs text-gray-400">Soon</span>
+                  )}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg class="w-6 h-6 block" id="menu-icon-open" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg class="w-6 h-6 hidden" id="menu-icon-close" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col gap-2">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "px-4 py-2 text-base font-medium rounded-lg transition-colors duration-200",
+              isActive(link.href)
+                ? "text-primary-500 bg-primary-500/5"
+                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+
+        <div class="border-t border-gray-100 my-2 pt-2">
+          <span class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">Apps</span>
+          {apps.map((app) => (
+            <a
+              href={`/${app.slug}`}
+              class="flex items-center gap-3 px-4 py-2 text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+            >
+              <span class="w-2 h-2 rounded-full" style={`background-color: ${app.color}`}></span>
+              <span>{app.name}</span>
+              {app.status === 'coming-soon' && (
+                <span class="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">Soon</span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  menuButton?.addEventListener('click', () => {
+    const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!isExpanded));
+    mobileMenu?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('block');
+    iconClose?.classList.toggle('hidden');
+    iconClose?.classList.toggle('block');
+  });
+</script>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg-grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F3FF"/>
+      <stop offset="100%" style="stop-color:#FEF3C7"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#EC6161"/>
+      <stop offset="100%" style="stop-color:#e5d36e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg-grad2)"/>
+
+  <!-- Subscription cards crossed out -->
+  <g transform="translate(200, 200)">
+    <rect x="0" y="0" width="200" height="120" rx="8" fill="white" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="20" y="20" width="160" height="20" rx="4" fill="#E5E7EB"/>
+    <rect x="20" y="50" width="100" height="16" rx="4" fill="#F3F4F6"/>
+    <rect x="20" y="80" width="60" height="24" rx="4" fill="#FEE2E2"/>
+    <line x1="0" y1="0" x2="200" y2="120" stroke="#EC6161" stroke-width="4"/>
+    <line x1="200" y1="0" x2="0" y2="120" stroke="#EC6161" stroke-width="4"/>
+  </g>
+
+  <g transform="translate(450, 220)">
+    <rect x="0" y="0" width="200" height="120" rx="8" fill="white" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="20" y="20" width="160" height="20" rx="4" fill="#E5E7EB"/>
+    <rect x="20" y="50" width="100" height="16" rx="4" fill="#F3F4F6"/>
+    <rect x="20" y="80" width="60" height="24" rx="4" fill="#FEE2E2"/>
+    <line x1="0" y1="0" x2="200" y2="120" stroke="#EC6161" stroke-width="4"/>
+    <line x1="200" y1="0" x2="0" y2="120" stroke="#EC6161" stroke-width="4"/>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M700 300 L800 300" stroke="url(#accent2)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M780 280 L800 300 L780 320" stroke="url(#accent2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Better alternative card -->
+  <g transform="translate(850, 200)">
+    <rect x="0" y="0" width="200" height="120" rx="8" fill="white" stroke="#10B981" stroke-width="3"/>
+    <rect x="20" y="20" width="160" height="20" rx="4" fill="#D1FAE5"/>
+    <rect x="20" y="50" width="100" height="16" rx="4" fill="#ECFDF5"/>
+    <circle cx="160" cy="90" r="20" fill="#10B981"/>
+    <path d="M150 90 L158 98 L172 82" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="700" fill="#111827" text-anchor="middle">Subscription Fatigue</text>
+  <text x="600" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#6B7280" text-anchor="middle">Why smart brands are switching to reorder reminders</text>
+
+  <!-- Labels -->
+  <text x="300" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#9CA3AF" text-anchor="middle">Subscriptions</text>
+  <text x="950" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#059669" text-anchor="middle">Smart Reminders</text>
+</svg>

@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const subjects = [
+  { value: 'general', label: 'General Inquiry' },
+  { value: 'support', label: 'App Support' },
+  { value: 'partnership', label: 'Partnership' },
+  { value: 'other', label: 'Other' },
+];
+---
+
+<BaseLayout
+  title="Contact Us - Loomic"
+  description="Get in touch with the Loomic team. We'd love to hear from you about our Shopify apps, partnerships, or anything else."
+>
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Get in Touch
+          </h1>
+          <p class="text-xl text-gray-600">
+            We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+          </p>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-white">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm text-gray-500">Email us directly</div>
+              <a href="mailto:hello@loomic.com" class="text-lg font-medium text-gray-900 hover:text-primary-500 transition-colors">
+                hello@loomic.com
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <form
+          action="https://formsubmit.co/hello@loomic.com"
+          method="POST"
+          class="space-y-6"
+        >
+          <!-- FormSubmit configuration -->
+          <input type="hidden" name="_subject" value="New contact from loomic.com">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none">
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                Your Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="John Smith"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="john@example.com"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+              Subject
+            </label>
+            <select
+              id="subject"
+              name="subject"
+              required
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white"
+            >
+              <option value="">Select a subject...</option>
+              {subjects.map((subject) => (
+                <option value={subject.value}>{subject.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="6"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
+              placeholder="Tell us how we can help..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary w-full">
+            Send Message
+            <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </form>
+
+        <!-- Additional Info -->
+        <div class="mt-12 pt-8 border-t border-gray-100">
+          <div class="text-center">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">
+              Need app support?
+            </h3>
+            <p class="text-gray-600 mb-4">
+              For the fastest support, reach out directly from within the app in your Shopify admin.
+            </p>
+            <p class="text-sm text-gray-500">
+              We typically respond within a few hours during business days.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

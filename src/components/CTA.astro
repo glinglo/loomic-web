@@ -1,0 +1,49 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  buttonText: string;
+  buttonHref: string;
+  variant?: 'default' | 'gradient';
+}
+
+const { title, description, buttonText, buttonHref, variant = 'default' } = Astro.props;
+---
+
+<section class:list={[
+  "section-padding",
+  variant === 'gradient' ? "bg-gradient-to-r from-primary-500 to-secondary-500" : "bg-gray-50"
+]}>
+  <div class="container-custom text-center">
+    <h2 class:list={[
+      "text-2xl md:text-3xl font-bold mb-4",
+      variant === 'gradient' ? "text-white" : "text-gray-900"
+    ]}>
+      {title}
+    </h2>
+
+    {description && (
+      <p class:list={[
+        "text-lg mb-8 max-w-2xl mx-auto",
+        variant === 'gradient' ? "text-white/90" : "text-gray-600"
+      ]}>
+        {description}
+      </p>
+    )}
+
+    <a
+      href={buttonHref}
+      class:list={[
+        "inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-lg transition-all duration-200",
+        variant === 'gradient'
+          ? "bg-white text-gray-900 hover:bg-gray-100"
+          : "bg-gradient-to-r from-primary-500 to-secondary-500 text-white hover:opacity-90"
+      ]}
+    >
+      {buttonText}
+      <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import CategoryFilter from '../../components/CategoryFilter.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+
+// Get category from URL
+const url = new URL(Astro.request.url);
+const categoryParam = url.searchParams.get('category');
+
+// Get unique categories
+const categories = [...new Set(allPosts.map((post) => post.data.category))].sort();
+
+// Filter posts by category if specified
+const filteredPosts = categoryParam
+  ? allPosts.filter((post) => post.data.category === categoryParam)
+  : allPosts;
+
+// Sort by date
+const sortedPosts = filteredPosts.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+// Calculate reading time
+function getReadingTime(content: string): number {
+  const wordCount = content.split(/\s+/).length;
+  return Math.ceil(wordCount / 200);
+}
+---
+
+<BaseLayout
+  title="Blog - Loomic"
+  description="Insights on customer retention, profitability, and DTC strategy for Shopify merchants."
+>
+  <section class="section-padding">
+    <div class="container-custom">
+      <!-- Header -->
+      <div class="max-w-3xl mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Blog
+        </h1>
+        <p class="text-xl text-gray-600">
+          Insights on retention, profitability, and growth strategies for Shopify merchants.
+        </p>
+      </div>
+
+      <!-- Category Filter -->
+      <CategoryFilter categories={categories} currentCategory={categoryParam || undefined} />
+
+      <!-- Posts Grid -->
+      {sortedPosts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sortedPosts.map((post) => (
+            <BlogCard
+              title={post.data.title}
+              slug={post.id}
+              date={post.data.date}
+              category={post.data.category}
+              excerpt={post.data.excerpt}
+              image={post.data.image}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-gray-500">No posts found in this category.</p>
+          <a href="/blog" class="text-primary-500 font-medium hover:text-primary-600 mt-2 inline-block">
+            View all posts →
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
