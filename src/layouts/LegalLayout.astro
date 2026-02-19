@@ -1,4 +1,6 @@
 ---
+import BaseLayout from './BaseLayout.astro';
+
 interface Props {
   title: string;
   appName: string;
@@ -8,201 +10,157 @@ interface Props {
 const { title, appName, lastUpdated } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>{title}</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #EC6161;
-      --accent: #e5d36e;
-      --bg: #FAFAF8;
-      --text: #1a1a1a;
-      --text-muted: #6b6b6b;
-      --border: #e8e8e4;
-      --card: #ffffff;
+<BaseLayout
+  title={title}
+  description={`Privacy Policy for ${appName} by Loomic`}
+  noindex={true}
+>
+  <section class="legal-content">
+    <div class="legal-container">
+      <div class="legal-header">
+        <span class="app-badge">{appName}</span>
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last updated: {lastUpdated}</p>
+      </div>
+
+      <div class="legal-body">
+        <slot />
+
+        <div class="contact-card">
+          <h3>Loomic</h3>
+          <p>Email: <a href="mailto:privacy@loomic.com">privacy@loomic.com</a></p>
+          <p>Web: <a href="https://loomic.com">loomic.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-content {
+    padding: 4rem 0 6rem;
+  }
+
+  .legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .legal-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .app-badge {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+  }
+
+  .legal-header h1 {
+    font-family: var(--font-display), ui-serif, Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+  }
+
+  .last-updated {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  .legal-body :global(h2) {
+    font-family: var(--font-display), ui-serif, Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal-body :global(p) {
+    color: #374151;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .legal-body :global(ul) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .legal-body :global(li) {
+    color: #374151;
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-body :global(a) {
+    color: #EC6161;
+  }
+
+  .legal-body :global(a:hover) {
+    color: #d94f4f;
+  }
+
+  .legal-body :global(.highlight-box) {
+    background: linear-gradient(135deg, #fef3f3 0%, #fdf8e8 100%);
+    border-left: 3px solid #EC6161;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+  }
+
+  .legal-body :global(.highlight-box p) {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+  }
+
+  .contact-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 3rem;
+  }
+
+  .contact-card h3 {
+    font-family: var(--font-display), ui-serif, Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-card p {
+    font-size: 0.95rem;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    .legal-content {
+      padding: 2rem 0 4rem;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'IBM Plex Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 16px;
+    .legal-header h1 {
+      font-size: 2rem;
     }
 
-    header {
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: 1.25rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    .legal-body :global(h2) {
+      font-size: 1.25rem;
     }
-
-    .header-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--primary);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-
-    .logo span {
-      color: var(--text);
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-weight: 500;
-      font-size: 0.9rem;
-      margin-left: 0.5rem;
-      opacity: 0.5;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--primary); }
-
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 3rem 2rem 6rem;
-    }
-
-    .page-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-
-    .last-updated {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-
-    p {
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-
-    ul {
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
-    }
-
-    li {
-      margin-bottom: 0.4rem;
-      color: var(--text);
-    }
-
-    a { color: var(--primary); }
-
-    .highlight-box {
-      background: linear-gradient(135deg, #fef3f3 0%, #fdf8e8 100%);
-      border-left: 3px solid var(--primary);
-      padding: 1.25rem 1.5rem;
-      border-radius: 0 8px 8px 0;
-      margin: 1.5rem 0;
-    }
-
-    .highlight-box p {
-      margin-bottom: 0;
-      font-size: 0.95rem;
-    }
-
-    .contact-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-top: 2rem;
-    }
-
-    .contact-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .contact-card p { font-size: 0.95rem; }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    @media (max-width: 600px) {
-      main { padding: 2rem 1.25rem 4rem; }
-      .page-title { font-size: 2rem; }
-      h2 { font-size: 1.3rem; }
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <div class="header-inner">
-    <a href="/" class="logo">Loomic <span>{appName}</span></a>
-    <nav class="nav-links">
-      <a href="mailto:privacy@loomic.com">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <h1 class="page-title">Privacy Policy</h1>
-  <p class="last-updated">Last updated: {lastUpdated}</p>
-
-  <slot />
-
-  <div class="contact-card">
-    <h3>Loomic</h3>
-    <p>Email: <a href="mailto:privacy@loomic.com">privacy@loomic.com</a></p>
-    <p>Web: <a href="https://loomic.com">loomic.com</a></p>
-  </div>
-</main>
-
-<footer>
-  &copy; {new Date().getFullYear()} Loomic. All rights reserved.
-</footer>
-
-</body>
-</html>
+  }
+</style>
