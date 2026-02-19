@@ -16,10 +16,10 @@
     "color": "#10B981"
   },
   {
-    "name": "StockAlert",
-    "slug": "stockalert",
-    "tagline": "Never miss a restock opportunity again",
-    "icon": "/images/apps/stockalert-icon.svg",
+    "name": "ChatHub",
+    "slug": "chathub",
+    "tagline": "All your customer conversations in one place",
+    "icon": "/images/apps/chathub-icon.svg",
     "status": "coming-soon",
     "color": "#6366F1"
   }
