@@ -5,6 +5,22 @@
     "tagline": "All your customer conversations in one place",
     "icon": "/images/apps/chathub-icon.svg",
     "status": "live",
-    "color": "#6366F1"
+    "color": "#5c6ac4"
+  },
+  {
+    "name": "OrderProfit",
+    "slug": "orderprofit",
+    "tagline": "Track real profit margins on every order",
+    "icon": "/images/apps/orderprofit-icon.svg",
+    "status": "coming-soon",
+    "color": "#f4a15d"
+  },
+  {
+    "name": "BuyAgain",
+    "slug": "buyagain",
+    "tagline": "Boost repeat purchases with smart reminders",
+    "icon": "/images/apps/buyagain-icon.svg",
+    "status": "coming-soon",
+    "color": "#ee5a6f"
   }
 ]

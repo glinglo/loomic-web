@@ -4,6 +4,8 @@ import BaseLayout from './BaseLayout.astro';
 interface PricingPlan {
   plan: string;
   price: string;
+  yearlyPrice?: string;
+  yearlyDiscount?: string;
   features: string[];
 }
 
@@ -86,12 +88,20 @@ const featureIcons = [
   <section class="section-padding bg-gradient-to-b from-gray-50 to-white">
     <div class="container-custom">
       <div class="max-w-3xl mx-auto text-center">
-        <div
-          class="inline-flex items-center justify-center w-20 h-20 rounded-2xl text-white text-3xl font-bold mb-6"
-          style={`background-color: ${color}`}
-        >
-          {name.charAt(0)}
-        </div>
+        {slug === 'chathub' ? (
+          <img
+            src="/images/chathub-icon.png"
+            alt={`${name} icon`}
+            class="w-20 h-20 rounded-2xl mb-6 mx-auto"
+          />
+        ) : (
+          <div
+            class="inline-flex items-center justify-center w-20 h-20 rounded-2xl text-white text-3xl font-bold mb-6"
+            style={`background-color: ${color}`}
+          >
+            {name.charAt(0)}
+          </div>
+        )}
 
         <div class="flex items-center justify-center gap-3 mb-4">
           <span class="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
@@ -105,12 +115,19 @@ const featureIcons = [
         </div>
 
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          {name}
+          {slug === 'chathub' ? tagline : name}
         </h1>
 
-        <p class="text-xl md:text-2xl text-gray-600 mb-8">
-          {tagline}
-        </p>
+        {slug !== 'chathub' && (
+          <p class="text-xl md:text-2xl text-gray-600 mb-8">
+            {tagline}
+          </p>
+        )}
+        {slug === 'chathub' && (
+          <p class="text-xl md:text-2xl text-gray-600 mb-8">
+            {problem}
+          </p>
+        )}
 
         {status === 'live' ? (
           <a href={appStoreUrl} class="btn-primary" target="_blank" rel="noopener noreferrer">
@@ -124,23 +141,37 @@ const featureIcons = [
             Coming Soon
           </button>
         )}
+
+        {slug === 'chathub' && (
+          <div class="mt-12">
+            <img
+              src="/images/chathub.png"
+              alt="ChatHub widget on mobile devices showing multi-channel support"
+              class="mx-auto max-w-full h-auto"
+              width="600"
+              height="400"
+            />
+          </div>
+        )}
       </div>
     </div>
   </section>
 
-  <!-- Problem -->
-  <section class="section-padding">
-    <div class="container-custom">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
-          The Problem
-        </h2>
-        <p class="text-lg text-gray-600 leading-relaxed text-center">
-          {problem}
-        </p>
+  {slug !== 'chathub' && (
+    <!-- Problem -->
+    <section class="section-padding">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
+            The Problem
+          </h2>
+          <p class="text-lg text-gray-600 leading-relaxed text-center">
+            {problem}
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- How It Works -->
   <section class="section-padding bg-gray-50">
@@ -168,7 +199,7 @@ const featureIcons = [
   <section class="section-padding">
     <div class="container-custom">
       <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-12 text-center">
-        Features
+        {slug === 'chathub' ? 'Easily Grow Your Store' : 'Features'}
       </h2>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -176,7 +207,7 @@ const featureIcons = [
           <div class="p-6 bg-white rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-200">
             <div
               class="inline-flex items-center justify-center w-10 h-10 rounded-lg text-white mb-4"
-              style={`background-color: ${color}`}
+              style={`background-color: ${slug === 'chathub' ? '#008060' : color}`}
             >
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={featureIcons[index % featureIcons.length]} />
             </div>
@@ -192,23 +223,60 @@ const featureIcons = [
   <section class="section-padding bg-gray-50">
     <div class="container-custom">
       <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center">
-        Simple, Transparent Pricing
+        {slug === 'chathub' ? 'Pricing plans' : 'Simple, Transparent Pricing'}
       </h2>
       <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-        Choose the plan that fits your store. All plans include full access to the dashboard.
+        {slug === 'chathub'
+          ? 'Select the plan that best suits your needs and unlock powerful tools to manage your finances efficiently'
+          : 'Choose the plan that fits your store. All plans include full access to the dashboard.'}
       </p>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-        {pricing.map((plan, index) => (
-          <div class:list={[
-            "p-6 bg-white rounded-xl border-2 transition-all duration-200",
-            index === pricing.length - 1 ? "border-primary-500 shadow-lg" : "border-gray-100 hover:border-gray-200"
-          ]}>
-            {index === pricing.length - 1 && (
-              <div class="text-xs font-semibold text-primary-500 mb-2">MOST POPULAR</div>
+        {pricing.map((plan, index) => {
+          const isHighlighted = slug === 'chathub' ? index === 1 : index === pricing.length - 1;
+          return (
+          <div class="relative">
+            {isHighlighted && slug === 'chathub' && (
+              <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary-500 text-white text-xs font-semibold px-3 py-1 rounded-full z-10">
+                MOST POPULAR
+              </div>
             )}
-            <h3 class="text-lg font-semibold text-gray-900 mb-1">{plan.plan}</h3>
-            <div class="text-3xl font-bold text-gray-900 mb-4">{plan.price}</div>
+            <div class:list={[
+              "p-6 bg-white rounded-xl border-2 transition-all duration-200 h-full",
+              isHighlighted ? "border-primary-500 shadow-lg" : "border-gray-100 hover:border-gray-200"
+            ]}>
+              {isHighlighted && slug !== 'chathub' && (
+                <div class="text-xs font-semibold text-primary-500 mb-2">MOST POPULAR</div>
+              )}
+              <h3 class="text-lg font-semibold text-gray-900 mb-1">
+                {plan.plan}
+              </h3>
+            <div class="mb-4">
+              <div class="flex items-baseline gap-1">
+                <span class="text-3xl font-bold text-gray-900">{plan.price}</span>
+                {plan.price !== 'Free' && <span class="text-gray-500">/ month</span>}
+              </div>
+              {plan.yearlyPrice && (
+                <div class="text-sm text-gray-500 mt-1">
+                  or {plan.yearlyPrice} and {plan.yearlyDiscount}
+                </div>
+              )}
+            </div>
+            {slug === 'chathub' && status === 'live' && (
+              <a
+                href={appStoreUrl}
+                class:list={[
+                  "block w-full text-center py-2 px-4 rounded-lg font-semibold mb-4 transition-all duration-200",
+                  isHighlighted
+                    ? "bg-gray-900 text-white hover:bg-gray-800"
+                    : "bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+                ]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Start now
+              </a>
+            )}
             <ul class="space-y-2">
               {plan.features.map((feature) => (
                 <li class="flex items-start gap-2 text-sm text-gray-600">
@@ -219,14 +287,15 @@ const featureIcons = [
                 </li>
               ))}
             </ul>
+            </div>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="section-padding bg-gradient-to-r from-primary-500 to-secondary-500">
+  <section class="section-padding bg-primary-500">
     <div class="container-custom text-center">
       <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
         Ready to try {name}?

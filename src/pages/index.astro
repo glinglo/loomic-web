@@ -46,8 +46,8 @@ const whyLoomicItems = [
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <!-- Gradient decoration -->
-    <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[400px] h-[400px] bg-gradient-to-tr from-secondary-500/10 to-primary-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-primary-500/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[400px] h-[400px] bg-primary-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="container-custom section-padding relative">
       <div class="max-w-3xl mx-auto text-center">
@@ -71,7 +71,7 @@ const whyLoomicItems = [
   </section>
 
   <!-- Apps Showcase -->
-  <section id="apps" class="section-padding bg-gray-50">
+  <section id="apps" class="section-padding bg-gray-50/50">
     <div class="container-custom">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -112,7 +112,7 @@ const whyLoomicItems = [
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
         {whyLoomicItems.map((item) => (
           <div class="text-center">
-            <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 text-white mb-4">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary-500 text-white mb-4">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={item.icon} />
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>

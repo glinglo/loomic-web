@@ -9,20 +9,30 @@ interface Props {
 }
 
 const { name, slug, tagline, icon, status, color } = Astro.props;
+
+const Tag = status === 'coming-soon' ? 'div' : 'a';
+const tagProps = status === 'coming-soon'
+  ? { class: "block bg-white rounded-xl border border-gray-100 p-6 transition-all duration-200 cursor-not-allowed opacity-90" }
+  : { href: `/${slug}`, class: "group block bg-white rounded-xl border border-gray-100 p-6 transition-all duration-200 hover:border-gray-200 hover:shadow-lg" };
 ---
 
-<a
-  href={`/${slug}`}
-  class="group block bg-white rounded-xl border border-gray-100 p-6 transition-all duration-200 hover:border-gray-200 hover:shadow-lg"
->
+<Tag {...tagProps}>
   <div class="flex items-start gap-4">
     <!-- Icon -->
-    <div
-      class="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl font-bold shrink-0"
-      style={`background-color: ${color}`}
-    >
-      {name.charAt(0)}
-    </div>
+    {slug === 'chathub' ? (
+      <img
+        src="/images/chathub-icon.png"
+        alt={`${name} icon`}
+        class="w-12 h-12 rounded-xl shrink-0"
+      />
+    ) : (
+      <div
+        class="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl font-bold shrink-0"
+        style={`background-color: ${color}`}
+      >
+        {name.charAt(0)}
+      </div>
+    )}
 
     <div class="flex-1 min-w-0">
       <div class="flex items-center gap-2 mb-1">
@@ -38,12 +48,18 @@ const { name, slug, tagline, icon, status, color } = Astro.props;
       <p class="text-sm text-gray-500 mb-3">
         {tagline}
       </p>
-      <span class="inline-flex items-center text-sm font-medium text-primary-500 group-hover:gap-2 transition-all duration-200">
-        Learn more
-        <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </span>
+      {status === 'live' ? (
+        <span class="inline-flex items-center text-sm font-medium text-primary-500 group-hover:gap-2 transition-all duration-200">
+          Learn more
+          <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+      ) : (
+        <span class="inline-flex items-center text-sm font-medium text-gray-400">
+          Available soon
+        </span>
+      )}
     </div>
   </div>
-</a>
+</Tag>

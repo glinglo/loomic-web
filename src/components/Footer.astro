@@ -8,18 +8,17 @@ const footerLinks = {
     { href: '/about', label: 'About Us' },
   ],
   apps: apps.map(app => ({
-    href: `/${app.slug}`,
+    href: app.status === 'live' ? `/${app.slug}` : null,
     label: app.name,
+    status: app.status,
   })),
-  legal: [
-    { href: '/privacy-policy.html', label: 'Privacy Policy' },
-  ],
+  legal: [],
 };
 ---
 
 <footer class="bg-gray-50 border-t border-gray-100">
   <div class="container-custom section-padding">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
       <!-- Brand -->
       <div class="col-span-2 md:col-span-1">
         <a href="/" class="inline-block mb-4">
@@ -50,23 +49,15 @@ const footerLinks = {
         <ul class="space-y-3">
           {footerLinks.apps.map((link) => (
             <li>
-              <a href={link.href} class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Legal -->
-      <div>
-        <h4 class="text-sm font-semibold text-gray-900 mb-4">Legal</h4>
-        <ul class="space-y-3">
-          {footerLinks.legal.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
-                {link.label}
-              </a>
+              {link.href ? (
+                <a href={link.href} class="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+                  {link.label}
+                </a>
+              ) : (
+                <span class="text-sm text-gray-400">
+                  {link.label} <span class="text-xs">(Soon)</span>
+                </span>
+              )}
             </li>
           ))}
         </ul>

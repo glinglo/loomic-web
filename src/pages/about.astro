@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CTA from '../components/CTA.astro';
 
 const values = [
   {
@@ -85,7 +84,7 @@ const values = [
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {values.map((value) => (
           <div class="bg-white p-6 rounded-xl border border-gray-100">
-            <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 text-white mb-4">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary-500 text-white mb-4">
               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={value.icon} />
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">{value.title}</h3>
@@ -120,12 +119,4 @@ const values = [
       </div>
     </div>
   </section>
-
-  <!-- CTA -->
-  <CTA
-    title="Want to work with us?"
-    description="We're always looking for feedback, partnership ideas, and ways to help merchants succeed."
-    buttonText="Get in touch"
-    buttonHref="/contact"
-  />
 </BaseLayout>
